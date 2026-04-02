@@ -1,16 +1,10 @@
 <?php
 // ====================== DATABASE CONNECTION ======================
-$host = 'localhost';
-$db   = 'ubistreet';
-$user = 'root';
-$pass = '';
+// ====================== DATABASE CONNECTION ======================
+require_once 'db.php'; 
 
-$conn = new mysqli($host, $user, $pass, $db);
-
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
+// ====================== FIXED SLOTS ======================
+$slots = [
 $conn->set_charset("utf8mb4");
 
 // ====================== FIXED SLOTS ======================
