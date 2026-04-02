@@ -1,20 +1,18 @@
 <?php
 // ====================== DATABASE CONNECTION ======================
-// ====================== DATABASE CONNECTION ======================
 require_once 'db.php'; 
 
-// ====================== FIXED SLOTS ======================
-$slots = [
+// Ensure charset is set (Note: If this is already in db.php, you can remove this line)
 $conn->set_charset("utf8mb4");
 
 // ====================== FIXED SLOTS ======================
 $slots = [
-    ['label' => '4:30 PM - 6:00 PM',  'time' => '16:30-18:00', 'price' => 280],
-    ['label' => '6:00 PM - 7:30 PM',  'time' => '18:00-19:30', 'price' => 300],
-    ['label' => '8:00 PM - 9:30 PM',  'time' => '20:00-21:30', 'price' => 400],
-    ['label' => '9:30 PM - 11:00 PM', 'time' => '21:30-23:00', 'price' => 400],
-    ['label' => '11:00 PM - 12:30 AM','time' => '23:00-00:30', 'price' => 350],
-    ['label' => '12:30 AM - 2:00 AM', 'time' => '00:30-02:00', 'price' => 300],
+    ['label' => '4:30 PM - 6:00 PM',   'time' => '16:30-18:00', 'price' => 280],
+    ['label' => '6:00 PM - 7:30 PM',   'time' => '18:00-19:30', 'price' => 300],
+    ['label' => '8:00 PM - 9:30 PM',   'time' => '20:00-21:30', 'price' => 400],
+    ['label' => '9:30 PM - 11:00 PM',  'time' => '21:30-23:00', 'price' => 400],
+    ['label' => '11:00 PM - 12:30 AM', 'time' => '23:00-00:30', 'price' => 350],
+    ['label' => '12:30 AM - 2:00 AM',  'time' => '00:30-02:00', 'price' => 300],
 ];
 
 $error_message = '';
