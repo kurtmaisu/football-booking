@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Astromomo Football FIeld 7side | Premium Artificial Turf • Kuantan</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap');
+    
+    .tail-container { font-family: 'Inter', system-ui, sans-serif; }
+    .display-font { font-family: 'Space Grotesk', sans-serif; }
+
+    /* Hero slider base styles */
+    .hero-slider {
+      position: relative;
+      height: 100vh;
+      overflow: hidden;
+    }
+    .slide-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      opacity: 0;
+      transition: opacity 1.2s cubic-bezier(0.25, 0.1, 0.15, 1);
+      z-index: 0;
+    }
+    .slide-bg.active {
+      opacity: 1;
+      z-index: 1;
+    }
+    /* Dark overlay gradient - improved depth */
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.55) 50%, rgba(0,0,0,0.7) 100%);
+      z-index: 2;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 10;
+    }
+    /* slider indicator dots */
+    .slider-dots {
+      position: absolute;
+      bottom: 32px;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      z-index: 15;
+    }
+    .dot {
+      width: 10px;
+      height: 10px;
+      background-color: rgba(255,255,255,0.5);
+      border-radius: 50%;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .dot.active-dot {
+      background-color: #4ade80;
+      width: 28px;
+      border-radius: 20px;
+      box-shadow: 0 0 8px rgba(74,222,128,0.6);
+    }
+    .price-card:hover { transform: translateY(-8px); transition: all 0.25s ease; }
+    .field-img { transition: transform 0.5s ease; }
+    .group:hover .field-img { transform: scale(1.05); }
+    /* fade animation for texts optional */
+    @keyframes fadeSlideUp {
+      0% { opacity: 0; transform: translateY(18px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    .hero-content h1, .hero-content .hero-animate {
+      animation: fadeSlideUp 0.7s ease-out forwards;
+    }
+  </style>
+</head>
+<body class="tail-container bg-zinc-950 text-white overflow-x-hidden">
+
+  <!-- Navbar -->
+  <nav class="bg-black/95 backdrop-blur-xl fixed w-full z-50 border-b border-green-500/10">
+    <div class="max-w-screen-2xl mx-auto px-6 py-4 flex justify-between items-center">
+      <div class="flex items-center gap-3">
+        <!-- Clickable Logo -->
+        <a href="index.html">
+          <img src="logo/file.jpg" alt="Astromomo Football FIeld Logo" class="h-12 w-auto object-contain hover:scale-105 transition-transform">
+        </a>
+        <div>
+          <h1 id="logo-title" class="display-font text-2xl font-semibold tracking-tighter">Astromomo Football FIeld</h1>
+          <p id="logo-subtitle" class="text-green-400 text-xs -mt-0.5 font-medium">7SIDE FOOTBALL FIELD</p>
+        </div>
+      </div>
+
+      <div class="hidden md:flex items-center gap-8 text-base font-medium">
+        <a href="#fields" class="hover:text-green-400 transition-colors nav-link">Fields</a>
+        <a href="#pricing" class="hover:text-green-400 transition-colors nav-link">Rates</a>
+        <a href="#location" class="hover:text-green-400 transition-colors nav-link">Location</a>
+        <a href="#contact" class="hover:text-green-400 transition-colors nav-link">Contact</a>
+      </div>
+
+      <div class="flex items-center gap-4">
+        <button onclick="toggleLanguage()" 
+          class="bg-zinc-800 hover:bg-zinc-700 text-white text-sm font-medium px-4 py-2 rounded-2xl flex items-center gap-2 border border-green-500/30">
+          <span id="current-lang">ENG</span>
+          <i class="fas fa-chevron-down text-xs"></i>
+        </button>
+        <a href="booking.php" 
+           class="bg-green-500 hover:bg-green-400 text-black font-semibold px-6 py-2.5 rounded-2xl text-sm transition-all shadow-lg shadow-green-500/20">
+          Book Now
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section with dynamic slider using 001.jpg & 002.jpg from "photo" folder -->
+  <section class="hero-slider relative">
+    <!-- Two background images from local folder "photo" -->
+    <div id="slide1" class="slide-bg" style="background-image: url('photo/001.jpg');"></div>
+    <div id="slide2" class="slide-bg" style="background-image: url('photo/002.jpg');"></div>
+    <div class="hero-overlay"></div>
+    
+    <div class="hero-content relative z-10 h-screen flex items-center">
+      <div class="max-w-screen-2xl mx-auto px-6 pt-16 w-full">
+        <div class="max-w-2xl">
+          <div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md px-4 py-1.5 rounded-full text-xs font-medium mb-6">
+            <div class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+            <span id="hero-badge">BRAND NEW IN KUANTAN</span>
+          </div>
+          
+          <h1 id="hero-title" class="display-font text-6xl md:text-7xl font-bold tracking-tighter leading-none mb-6">
+            NEW ARTIFICIAL TURF IN KUANTAN            
+          </h1>
+          
+          <!-- Updated tagline: "New Artificial Turf In Kuantan" (replaces previous dynamic text but kept consistent across languages) -->
+          <p id="hero-subtitle" class="text-xl md:text-2xl text-zinc-300 mb-10">New Artificial Turf In Kuantan</p>
+          
+          <div class="flex flex-wrap gap-4">
+            <a href="booking.php" 
+               class="bg-white text-zinc-950 px-8 py-4 rounded-3xl font-semibold text-lg flex items-center gap-3 hover:scale-105 transition-all shadow-xl">
+              <i class="fas fa-calendar-check"></i>
+              <span id="btn-book">Book Slot</span>
+            </a>
+            <a href="#location" class="border border-white/60 hover:border-white px-8 py-4 rounded-3xl font-medium text-lg flex items-center gap-3 transition-all backdrop-blur-sm">
+              <i class="fas fa-map-marker-alt"></i>
+              <span id="btn-location">Location</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Custom slider dots indicator -->
+    <div class="slider-dots">
+      <div class="dot active-dot" data-index="0"></div>
+      <div class="dot" data-index="1"></div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section class="py-20 bg-zinc-900">
+    <div class="max-w-screen-2xl mx-auto px-6">
+      <div class="grid md:grid-cols-2 gap-12 items-center">
+        <div>
+          <span id="about-badge" class="text-green-400 uppercase tracking-widest text-xs font-medium">KUANTAN'S NEWEST PITCH</span>
+          <h2 id="about-title" class="display-font text-5xl font-semibold tracking-tighter mt-4 mb-6 leading-tight">
+            Two Fields.<br>Premium Quality.
+          </h2>
+          <div class="space-y-6 text-zinc-300">
+            <p id="about-desc">Brand new artificial turf at Astromomo Football FIeld offering excellent playing conditions for both casual and competitive football.</p>
+            <div class="grid grid-cols-2 gap-8 pt-4">
+              <div>
+                <div class="text-green-400 text-3xl font-bold mb-1">7-A-SIDE</div>
+                <p id="field7-desc" class="text-sm text-zinc-400">Fast-paced games with friends</p>
+              </div>
+              <div>
+                <div class="text-green-400 text-3xl font-bold mb-1">9-A-SIDE</div>
+                <p id="field9-desc" class="text-sm text-zinc-400">Larger pitch for bigger teams</p>
+              </div>
+            </div>
+          </div>
+          <p id="about-footer" class="mt-10 text-zinc-400 text-sm">FIFA-standard turf • Good lighting • Safe &amp; clean</p>
+        </div>
+        <div class="relative rounded-3xl overflow-hidden shadow-2xl">
+          <img src="https://picsum.photos/id/1015/800/520" alt="Football Field" class="w-full rounded-3xl shadow-xl">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing Section -->
+  <section id="pricing" class="py-20 bg-black">
+    <div class="max-w-screen-2xl mx-auto px-6">
+      <div class="text-center mb-12">
+        <span id="pricing-badge" class="uppercase text-green-400 text-xs tracking-widest font-medium">RATES</span>
+        <h2 id="pricing-title" class="display-font text-5xl font-semibold tracking-tighter mt-2">1.5 Hour Slots</h2>
+      </div>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+        <div class="price-card bg-zinc-900 border border-zinc-800 rounded-3xl p-8 hover:border-green-500 transition-all">
+          <div class="text-green-400 text-sm font-medium">4:30 PM — 6:00 PM</div>
+          <div class="text-5xl font-bold tracking-tighter mt-3 mb-1">RM280</div>
+          <div class="text-xs text-zinc-400">1.5 hours</div>
+        </div>
+        <div class="price-card bg-zinc-900 border border-zinc-800 rounded-3xl p-8 hover:border-green-500 transition-all">
+          <div class="text-green-400 text-sm font-medium">6:00 PM — 7:30 PM</div>
+          <div class="text-5xl font-bold tracking-tighter mt-3 mb-1">RM300</div>
+          <div class="text-xs text-zinc-400">1.5 hours</div>
+        </div>
+        <div class="price-card bg-zinc-900 border border-zinc-800 rounded-3xl p-8 hover:border-green-500 transition-all">
+          <div class="text-green-400 text-sm font-medium">8:00 PM — 9:30 PM</div>
+          <div class="text-5xl font-bold tracking-tighter mt-3 mb-1">RM400</div>
+          <div class="text-xs text-zinc-400">1.5 hours</div>
+        </div>
+        <div class="price-card bg-zinc-900 border border-zinc-800 rounded-3xl p-8 hover:border-green-500 transition-all">
+          <div class="text-green-400 text-sm font-medium">9:30 PM — 11:00 PM</div>
+          <div class="text-5xl font-bold tracking-tighter mt-3 mb-1">RM400</div>
+          <div class="text-xs text-zinc-400">1.5 hours</div>
+        </div>
+        <div class="price-card bg-zinc-900 border border-zinc-800 rounded-3xl p-8 hover:border-green-500 transition-all">
+          <div class="text-green-400 text-sm font-medium">11:00 PM — 12:30 AM</div>
+          <div class="text-5xl font-bold tracking-tighter mt-3 mb-1">RM350</div>
+          <div class="text-xs text-zinc-400">1.5 hours</div>
+        </div>
+        <div class="price-card bg-zinc-900 border border-zinc-800 rounded-3xl p-8 hover:border-green-500 transition-all">
+          <div class="text-green-400 text-sm font-medium">12:30 AM — 2:00 AM</div>
+          <div class="text-5xl font-bold tracking-tighter mt-3 mb-1">RM300</div>
+          <div class="text-xs text-zinc-400">1.5 hours</div>
+        </div>
+      </div>
+      <div class="text-center mt-12">
+        <p id="pricing-note" class="text-zinc-400 text-sm mb-6">
+          Same rates apply for both 7-a-side and 9-a-side fields • Minimum booking: 1 slot
+        </p>
+        <a href="booking.php" 
+           class="inline-flex items-center gap-3 bg-green-500 hover:bg-green-400 text-black font-semibold px-10 py-4 rounded-3xl text-lg transition-all shadow-lg">
+          <i class="fas fa-calendar-check"></i>
+          <span id="rate-book-btn">Book Now</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Fields Section -->
+  <section id="fields" class="py-20 bg-zinc-900">
+    <div class="max-w-screen-2xl mx-auto px-6">
+      <h2 id="fields-title" class="display-font text-5xl font-semibold tracking-tighter text-center mb-12">Our Fields</h2>
+      <div class="grid md:grid-cols-2 gap-8">
+        <div class="group bg-zinc-950 rounded-3xl overflow-hidden shadow-xl">
+          <div class="overflow-hidden">
+            <img src="https://picsum.photos/id/870/800/420" alt="7-a-side Field" class="field-img w-full h-64 object-cover">
+          </div>
+          <div class="p-8">
+            <div class="uppercase text-green-400 text-xs tracking-widest mb-2">7-A-SIDE</div>
+            <h3 class="text-3xl font-semibold mb-2">Fast &amp; Exciting</h3>
+            <p id="field7-text" class="text-zinc-400 text-sm">Perfect for small groups and quick matches.</p>
+          </div>
+        </div>
+        <div class="group bg-zinc-950 rounded-3xl overflow-hidden shadow-xl">
+          <div class="overflow-hidden">
+            <img src="https://picsum.photos/id/1016/800/420" alt="9-a-side Field" class="field-img w-full h-64 object-cover">
+          </div>
+          <div class="p-8">
+            <div class="uppercase text-green-400 text-xs tracking-widest mb-2">9-A-SIDE</div>
+            <h3 class="text-3xl font-semibold mb-2">Competitive Pitch</h3>
+            <p id="field9-text" class="text-zinc-400 text-sm">Larger field for serious games and training.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Location Section -->
+  <section id="location" class="py-20 bg-black">
+    <div class="max-w-screen-2xl mx-auto px-6">
+      <div class="grid md:grid-cols-2 gap-12">
+        <div>
+          <h2 id="location-title" class="display-font text-5xl font-semibold tracking-tighter mb-6">Visit Us</h2>
+          <div class="text-lg space-y-2 text-zinc-200">
+            <p><strong id="location-name">Astromomo Football FIeld 7side Football Field</strong><br>
+            Astromomo Football FIeld, Kuantan, Pahang<br>
+            Near Bazar Bundle Kuantan Lot 13</p>
+          </div>
+          <a href="https://maps.app.goo.gl/LuYiXKhKS8c5zPqZ8" target="_blank"
+             class="mt-8 inline-flex items-center gap-3 text-green-400 hover:text-green-300 text-lg transition">
+            <i class="fas fa-map-marker-alt text-2xl"></i>
+            <span id="map-link">Open in Google Maps</span>
+          </a>
+        </div>
+        <div class="rounded-3xl overflow-hidden border border-zinc-800 shadow-xl">
+          <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d763.1396030583267!2d103.32273849974129!3d3.8070359401889515!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31c8bb778d9a5451%3A0x71f5d6f4a849086a!2sUbi%20%20(Bazar%20Bundle%20Kuantan%20Lot%2013)!5e1!3m2!1sen!2smy!4v1740000000000"
+            width="100%" 
+            height="420" 
+            style="border:0;" 
+            allowfullscreen="" 
+            loading="lazy" 
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="py-20 bg-zinc-900">
+    <div class="max-w-screen-2xl mx-auto px-6 text-center">
+      <h2 id="contact-title" class="display-font text-5xl font-semibold tracking-tighter mb-6">Contact Us</h2>
+      <p id="contact-desc" class="text-xl text-zinc-300 mb-12 max-w-md mx-auto">Ready to book? Reach out to us via WhatsApp or call for fast response.</p>
+      <div class="flex flex-col sm:flex-row gap-6 justify-center">
+        <a href="https://wa.me/60123456789" target="_blank"
+           class="bg-green-500 hover:bg-green-400 text-black px-10 py-6 rounded-3xl font-semibold text-xl flex items-center justify-center gap-4 transition shadow-xl">
+          <i class="fab fa-whatsapp text-3xl"></i>
+          <span id="whatsapp-btn">WhatsApp Now</span>
+        </a>
+        <a href="tel:+60123456789" 
+           class="border-2 border-white/70 hover:bg-white/10 px-10 py-6 rounded-3xl font-semibold text-xl flex items-center justify-center gap-4 transition">
+          <i class="fas fa-phone text-3xl"></i>
+          <span id="call-btn">Call Us</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Ready To Play CTA -->
+  <section id="book" class="py-24 bg-gradient-to-br from-green-600 to-emerald-600">
+    <div class="max-w-2xl mx-auto text-center px-6">
+      <h2 id="cta-title" class="display-font text-5xl font-semibold tracking-tighter mb-6">Ready to Play?</h2>
+      <p id="cta-desc" class="text-xl text-white/90 mb-10">Book your slot on Kuantan’s best artificial turf</p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="https://wa.me/60123456789" target="_blank"
+           class="bg-white text-black px-10 py-5 rounded-3xl font-semibold text-lg flex items-center justify-center gap-3 hover:scale-105 transition shadow-lg">
+          <i class="fab fa-whatsapp"></i>
+          <span id="cta-whatsapp">WhatsApp Now</span>
+        </a>
+        <a href="booking.php"
+           class="border-2 border-white/90 hover:bg-white/10 text-white px-10 py-5 rounded-3xl font-semibold text-lg flex items-center justify-center gap-3 transition">
+          <i class="fas fa-globe"></i>
+          <span id="online-booking-btn">Online Booking</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-black py-12 border-t border-zinc-900">
+    <div class="max-w-screen-2xl mx-auto px-6 text-center text-zinc-500 text-sm">
+      <p>© 2026 Astromomo Football FIeld 7side Football Field • Kuantan, Pahang</p>
+      <p class="mt-2">Premium Artificial Turf for the best football experience</p>
+    </div>
+  </footer>
+
+  <script>
+    // ========== HERO SLIDER LOGIC (001.jpg & 002.jpg) ==========
+    const slides = document.querySelectorAll('.slide-bg');
+    const dots = document.querySelectorAll('.dot');
+    let currentIndex = 0;
+    let slideInterval;
+
+    function activateSlide(index) {
+      // Remove active class from all slides
+      slides.forEach((slide, i) => {
+        slide.classList.remove('active');
+        if (i === index) {
+          slide.classList.add('active');
+        }
+      });
+      // Update dots UI
+      dots.forEach((dot, i) => {
+        if (i === index) {
+          dot.classList.add('active-dot');
+        } else {
+          dot.classList.remove('active-dot');
+        }
+      });
+      currentIndex = index;
+    }
+
+    function nextSlide() {
+      let next = (currentIndex + 1) % slides.length;
+      activateSlide(next);
+    }
+
+    function startAutoSlide() {
+      if (slideInterval) clearInterval(slideInterval);
+      slideInterval = setInterval(nextSlide, 4500);
+    }
+
+    // event listeners for manual dot click
+    dots.forEach((dot, idx) => {
+      dot.addEventListener('click', () => {
+        if (currentIndex !== idx) {
+          activateSlide(idx);
+          // reset interval after manual interaction
+          startAutoSlide();
+        }
+      });
+    });
+
+    // Initially set first slide as active and start slider
+    if (slides.length > 0) {
+      slides[0].classList.add('active');
+      activateSlide(0);
+      startAutoSlide();
+    }
+
+    // Optional: Pause auto-slide on hover over hero (enhanced UX)
+    const heroSection = document.querySelector('.hero-slider');
+    if (heroSection) {
+      heroSection.addEventListener('mouseenter', () => {
+        if (slideInterval) clearInterval(slideInterval);
+      });
+      heroSection.addEventListener('mouseleave', () => {
+        startAutoSlide();
+      });
+    }
+
+    // ========== BILINGUAL TRANSLATIONS (ENG / BM) ==========
+    // Note: hero-subtitle tagline is fixed as "New Artificial Turf In Kuantan" and does not switch with language.
+    // All other fields remain bilingual.
+    let isEnglish = true;
+
+    const translations = {
+      en: {
+        "logo-subtitle": "7SIDE FOOTBALL FIELD",
+        "hero-badge": "BRAND NEW IN KUANTAN",
+        "hero-title": "NEW ARTIFICIAL TURF IN KUANTAN",
+        // hero-subtitle intentionally static - not toggled to preserve new tagline
+        "btn-book": "Book Slot",
+        "btn-location": "Location",
+        "about-badge": "KUANTAN'S NEWEST PITCH",
+        "about-title": "Two Fields.<br>Premium Quality.",
+        "about-desc": "Brand new artificial turf at Astromomo Football FIeld offering excellent playing conditions for both casual and competitive football.",
+        "field7-desc": "Fast-paced games with friends",
+        "field9-desc": "Larger pitch for bigger teams",
+        "about-footer": "FIFA-standard turf • Good lighting • Safe & clean",
+        "pricing-badge": "RATES",
+        "pricing-title": "1.5 Hour Slots",
+        "pricing-note": "Same rates apply for both 7-a-side and 9-a-side fields • Minimum booking: 1 slot",
+        "rate-book-btn": "Book Now",
+        "fields-title": "Our Fields",
+        "field7-text": "Perfect for small groups and quick matches.",
+        "field9-text": "Larger field for serious games and training.",
+        "location-title": "Visit Us",
+        "location-name": "Astromomo Football FIeld 7side Football Field",
+        "map-link": "Open in Google Maps",
+        "contact-title": "Contact Us",
+        "contact-desc": "Ready to book? Reach out to us via WhatsApp or call for fast response.",
+        "whatsapp-btn": "WhatsApp Now",
+        "call-btn": "Call Us",
+        "cta-title": "Ready to Play?",
+        "cta-desc": "Book your slot on Kuantan’s best artificial turf",
+        "cta-whatsapp": "WhatsApp Now",
+        "online-booking-btn": "Online Booking"
+      },
+      ms: {
+        "logo-subtitle": "PADANG BOLA 7 SEPIHAK",
+        "hero-badge": "BARU DIBUKA DI KUANTAN",
+        "hero-title": "PADANG RUMPUT TIRUAN BARU DI KUANTAN",
+        // hero-subtitle stays as "New Artificial Turf In Kuantan" (consistent brand message, no translation toggle)
+        "btn-book": "Tempah Slot",
+        "btn-location": "Lokasi",
+        "about-badge": "PADANG BARU DI KUANTAN",
+        "about-title": "Dua Padang.<br>Kualiti Premium.",
+        "about-desc": "Rumput tiruan baru di Astromomo Football FIeld menawarkan keadaan permainan terbaik untuk bola sepak santai dan kompetitif.",
+        "field7-desc": "Permainan pantas bersama kawan-kawan",
+        "field9-desc": "Padang lebih besar untuk pasukan besar",
+        "about-footer": "Rumput standard FIFA • Lampu terang • Bersih & selamat",
+        "pricing-badge": "HARGA",
+        "pricing-title": "Slot 1.5 Jam",
+        "pricing-note": "Harga sama untuk padang 7-sepihak & 9-sepihak • Tempahan minimum: 1 slot",
+        "rate-book-btn": "Tempah Sekarang",
+        "fields-title": "Padang Kami",
+        "field7-text": "Sesuai untuk kumpulan kecil dan perlawanan pantas.",
+        "field9-text": "Padang lebih besar untuk permainan serius dan latihan.",
+        "location-title": "Lawati Kami",
+        "location-name": "Astromomo Football FIeld 7side Football Field",
+        "map-link": "Buka di Google Maps",
+        "contact-title": "Hubungi Kami",
+        "contact-desc": "Bersedia tempah? Hubungi kami melalui WhatsApp atau telefon untuk respons pantas.",
+        "whatsapp-btn": "WhatsApp Sekarang",
+        "call-btn": "Telefon Kami",
+        "cta-title": "Bersedia Main?",
+        "cta-desc": "Tempah slot anda di turf tiruan terbaik di Kuantan",
+        "cta-whatsapp": "WhatsApp Sekarang",
+        "online-booking-btn": "Tempahan Online"
+      }
+    };
+
+    function toggleLanguage() {
+      isEnglish = !isEnglish;
+      const lang = isEnglish ? 'en' : 'ms';
+      document.getElementById('current-lang').textContent = isEnglish ? 'ENG' : 'BM';
+
+      // Update all elements with IDs matching translation keys (hero-subtitle excluded because it's static)
+      document.querySelectorAll('[id]').forEach(el => {
+        const key = el.id;
+        // Skip hero-subtitle to keep the new tagline unchanged
+        if (key === 'hero-subtitle') return;
+        if (translations[lang][key]) {
+          if (key === 'hero-title' || key === 'about-title') {
+            el.innerHTML = translations[lang][key];
+          } else {
+            el.textContent = translations[lang][key];
+          }
+        }
+      });
+      
+      // update nav links that are not id-based
+      document.querySelectorAll('.nav-link').forEach(link => {
+        const text = link.textContent.trim();
+        if (text === 'Fields' || text === 'Padang') link.textContent = isEnglish ? 'Fields' : 'Padang';
+        if (text === 'Rates' || text === 'Harga') link.textContent = isEnglish ? 'Rates' : 'Harga';
+        if (text === 'Location' || text === 'Lokasi') link.textContent = isEnglish ? 'Location' : 'Lokasi';
+        if (text === 'Contact' || text === 'Hubungi') link.textContent = isEnglish ? 'Contact' : 'Hubungi';
+      });
+    }
+
+    // initial language set: ensure hero title and about title innerHTML are correct, and hero-subtitle fixed
+    window.onload = () => {
+      document.getElementById('current-lang').textContent = 'ENG';
+      const heroTitleEl = document.getElementById('hero-title');
+      if(heroTitleEl && translations.en['hero-title']) heroTitleEl.innerHTML = translations.en['hero-title'];
+      const aboutTitle = document.getElementById('about-title');
+      if(aboutTitle && translations.en['about-title']) aboutTitle.innerHTML = translations.en['about-title'];
+      // Explicitly ensure hero-subtitle displays the new tagline (hardcoded in HTML, but guarantee)
+      const heroSub = document.getElementById('hero-subtitle');
+      if(heroSub) heroSub.textContent = "New Artificial Turf In Kuantan";
+    };
+  </script>
+</body>
+</html>
